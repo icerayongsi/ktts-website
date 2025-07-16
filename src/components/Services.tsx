@@ -1,37 +1,37 @@
-import { Monitor, Smartphone, Cloud, Database, Shield, Cog } from "lucide-react";
+import { Cpu, Bot, Settings, Zap, Shield, Factory } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Services = () => {
   const services = [
     {
-      icon: Monitor,
-      title: "การพัฒนาเว็บไซต์",
-      description: "ออกแบบและพัฒนาเว็บไซต์ที่ทันสมัย ใช้งานง่าย และตอบสนองทุกอุปกรณ์"
+      icon: Cpu,
+      title: "ระบบ PLC Programming",
+      description: "การเขียนโปรแกรม PLC สำหรับควบคุมระบบอัตโนมัติในโรงงาน รองรับ Siemens, Mitsubishi, Omron และแบรนด์อื่นๆ"
     },
     {
-      icon: Smartphone,
-      title: "แอปพลิเคชันมือถือ",
-      description: "พัฒนาแอปพลิเคชันบนมือถือสำหรับ iOS และ Android ที่มีประสิทธิภาพสูง"
+      icon: Bot,
+      title: "Robot Programming",
+      description: "พัฒนาและตั้งโปรแกรมหุ่นยนต์อุตสาหกรรม สำหรับงาน Pick & Place, Welding, Assembly และ Material Handling"
     },
     {
-      icon: Cloud,
-      title: "บริการคลาวด์",
-      description: "ให้คำปรึกษาและติดตั้งระบบคลาวด์ เพื่อเพิ่มประสิทธิภาพการทำงาน"
+      icon: Settings,
+      title: "SCADA & HMI System",
+      description: "ออกแบบและพัฒนาระบบ SCADA และ HMI สำหรับการควบคุมและตรวจสอบกระบวนการผลิตแบบเรียลไทม์"
     },
     {
-      icon: Database,
-      title: "ระบบฐานข้อมูล",
-      description: "ออกแบบและจัดการระบบฐานข้อมูลที่มีประสิทธิภาพและปลอดภัย"
+      icon: Factory,
+      title: "Factory Automation",
+      description: "ระบบอัตโนมัติครบวงจรสำหรับโรงงาน ตั้งแต่การควบคุมเครื่องจักร ไปจนถึงระบบ MES และ ERP Integration"
     },
     {
       icon: Shield,
-      title: "ความปลอดภัยไซเบอร์",
-      description: "ตรวจสอบและเสริมความแข็งแกร่งด้านความปลอดภัยของระบบ IT"
+      title: "Industrial IoT",
+      description: "เชื่อมต่อเครื่องจักรและระบบโรงงานเข้ากับระบบ IoT เพื่อการตรวจสอบและวิเคราะห์ข้อมูลแบบเรียลไทม์"
     },
     {
-      icon: Cog,
-      title: "IT Consulting",
-      description: "ให้คำปรึกษาด้านเทคโนโลยีสารสนเทศและการวางแผนระบบ IT"
+      icon: Zap,
+      title: "Maintenance & Support",
+      description: "บริการดูแลรักษาระบบ อัพเกรดซอฟต์แวร์ และการสนับสนุนทางเทคนิคแบบ 24/7"
     }
   ];
 
@@ -44,8 +44,8 @@ const Services = () => {
           </h2>
           <div className="w-24 h-1 bg-secondary mx-auto mb-6"></div>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            เราให้บริการที่หลากหลายและครอบคลุมทุกความต้องการด้านเทคโนโลยี
-            พร้อมด้วยทีมงานมืออาชีพที่จะช่วยให้ธุรกิจของคุณก้าวไปข้างหน้า
+            เราให้บริการครบวงจรด้านระบบอัตโนมัติและซอฟต์แวร์ควบคุมโรงงาน
+            พร้อมด้วยทีมวิศวกรมืออาชีพที่จะช่วยยกระดับประสิทธิภาพการผลิตของคุณ
           </p>
         </div>
 

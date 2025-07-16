@@ -29,22 +29,22 @@ const Hero = () => {
             </div>
             
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              ผู้เชี่ยวชาญด้านเทคโนโลยีและการให้คำปรึกษา มุ่งมั่นในการส่งมอบโซลูชั่นที่ดีที่สุด
-              เพื่อความสำเร็จของธุรกิจของคุณ
+              ผู้เชี่ยวชาญด้านซอฟต์แวร์ควบคุมโรงงาน ระบบ PLC และ Robot อัตโนมัติ 
+              มุ่งมั่นในการส่งมอบโซลูชั่นอัตโนมัติที่ทันสมัยเพื่อเพิ่มประสิทธิภาพการผลิต
             </p>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
               <div className="flex items-center space-x-2">
                 <CheckCircle className="h-5 w-5 text-secondary" />
-                <span className="text-foreground">บริการมืออาชีพ</span>
+                <span className="text-foreground">ระบบ PLC</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle className="h-5 w-5 text-secondary" />
-                <span className="text-foreground">เทคโนโลยีทันสมัย</span>
+                <span className="text-foreground">Robot อัตโนมัติ</span>
               </div>
               <div className="flex items-center space-x-2">
                 <CheckCircle className="h-5 w-5 text-secondary" />
-                <span className="text-foreground">ความน่าเชื่อถือ</span>
+                <span className="text-foreground">ซอฟต์แวร์โรงงาน</span>
               </div>
             </div>
 
