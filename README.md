@@ -1,1 +1,1 @@
-# KT Tech solutiojn website
+# KT Tech solution website
