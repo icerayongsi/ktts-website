@@ -4,15 +4,17 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import fs from "fs";
 
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 443,
-    https: {
-      key: fs.readFileSync("./cloudflare.key"),
-      cert: fs.readFileSync("./cloudflare.crt")
-    }
+    port: 3100,
+    allowedHosts: ['kttechsolution.com'],
+    // https: {
+    //   key: fs.readFileSync("./cloudflare.key"),
+    //   cert: fs.readFileSync("./cloudflare.crt")
+    // }
   },
   plugins: [
     react(),
