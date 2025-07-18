@@ -37,8 +37,8 @@ const CustomerReference: React.FC = () => {
       {/* Enhanced Logos Container - now full width */}
       <div className="relative w-screen left-1/2 right-1/2 -translate-x-1/2 px-0">
         {/* Gradient Overlays */}
-        <div className="pointer-events-none absolute left-0 top-0 w-24 sm:w-32 h-full bg-gradient-to-r from-blue-100/80 to-transparent z-20"></div>
-        <div className="pointer-events-none absolute right-0 top-0 w-24 sm:w-32 h-full bg-gradient-to-l from-cyan-100/80 to-transparent z-20"></div>
+        <div className="pointer-events-none absolute left-0 top-0 w-24 sm:w-32 h-full bg-gradient-to-r from-white/80 to-transparent z-20"></div>
+        <div className="pointer-events-none absolute right-0 top-0 w-24 sm:w-32 h-full bg-gradient-to-l from-white/80 to-transparent z-20"></div>
 
         {/* Main Scrolling Container */}
         <div className="overflow-hidden w-full py-8">
