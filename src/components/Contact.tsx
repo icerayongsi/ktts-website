@@ -9,8 +9,10 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+// import { toast } from "sonner";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { useRef } from "react";
 
 const Contact = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -19,6 +21,12 @@ const Contact = () => {
     email: "",
     phone: "",
     message: "",
+  });
+  const [modal, setModal] = useState({
+    open: false,
+    type: "success",
+    message: "",
+    description: "",
   });
 
   const contactInfo = [
@@ -30,33 +38,44 @@ const Contact = () => {
         "แขวง คลองสามประเวศ เขต ลาดกระบัง",
         "กรุงเทพมหานคร 10520",
       ],
-      gradient: "from-blue-500 to-purple-600",
+      gradient: "from-blue-500 to-cyan-500",
     },
     {
       icon: Phone,
       title: "หมายเลขโทรศัพท์",
-      details: ["098-252-9163", "093-324-2933"],
-      gradient: "from-green-500 to-blue-500",
+      details: ["093-324-2933"],
+      gradient: "from-blue-500 to-cyan-500",
     },
     {
       icon: Mail,
       title: "อีเมล",
       details: ["kttechsolution.ktts@gmail.com"],
-      gradient: "from-orange-500 to-red-500",
+      gradient: "from-blue-500 to-cyan-500",
     },
     {
       icon: Building,
       title: "เลขประจำตัวผู้เสียภาษี",
       details: ["0745565002366"],
-      gradient: "from-purple-500 to-pink-500",
+      gradient: "from-blue-500 to-cyan-500",
     },
   ];
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    if (name === "phone") {
+      // Allow only numbers for the phone field
+      const numericValue = value.replace(/[^0-9]/g, "");
+      setFormData({
+        ...formData,
+        [name]: numericValue,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const [isSending, setIsSending] = useState(false);
@@ -64,7 +83,12 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
-      alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+      setModal({
+        open: true,
+        type: "error",
+        message: "ข้อมูลไม่ครบถ้วน",
+        description: "กรุณากรอกชื่อ-นามสกุล, อีเมล และข้อความให้ครบถ้วน",
+      });
       return;
     }
 
@@ -86,11 +110,21 @@ const Contact = () => {
         "D6aKydB5O1WSevLqy"
       );
 
-      alert("ส่งข้อความสำเร็จ ขอบคุณที่ติดต่อเรา!");
+      setModal({
+        open: true,
+        type: "success",
+        message: "ส่งข้อความสำเร็จ!",
+        description: "ขอบคุณที่ติดต่อเรา ทีมงานจะติดต่อกลับโดยเร็วที่สุด",
+      });
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error) {
       console.error("เกิดข้อผิดพลาด:", error.text);
-      alert("ขออภัย เกิดข้อผิดพลาดในการส่งข้อความ");
+      setModal({
+        open: true,
+        type: "error",
+        message: "เกิดข้อผิดพลาด!",
+        description: "กรุณาลองใหม่อีกครั้ง หรือใช้ช่องทางอื่น",
+      });
     } finally {
       setIsSending(false);
     }
@@ -172,7 +206,7 @@ const Contact = () => {
                 <CardContent>
                   {info.title === "ที่อยู่สำนักงาน" ? (
                     <a
-                      href={getHref(info.title)}
+                      href={getHref(info.title, info.details[0])}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -335,6 +369,74 @@ const Contact = () => {
           </Card>
         </div>
       </div>
+      {/* Custom Modal Notification */}
+      {modal.open && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur-sm animate-fade-in p-4">
+          <div
+            className={`relative bg-white rounded-2xl shadow-2xl p-6 sm:p-10 max-w-sm w-full flex flex-col items-center animate-pop-up border-4 ${
+              modal.type === "success" ? "border-green-400" : "border-red-400"
+            }`}
+          >
+            <div className="mb-4">
+              {modal.type === "success" ? (
+                <svg
+                  className="w-12 h-12 sm:w-16 sm:h-16 text-green-400 animate-bounce"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="w-12 h-12 sm:w-16 sm:h-16 text-red-400 animate-bounce"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              )}
+            </div>
+            <h3
+              className={`text-xl sm:text-2xl font-bold mb-2 ${
+                modal.type === "success" ? "text-green-500" : "text-red-500"
+              }`}
+            >
+              {modal.message}
+            </h3>
+            <p className="text-gray-700 text-center mb-6 text-sm sm:text-base">
+              {modal.description}
+            </p>
+            <button
+              className={`px-5 py-2 sm:px-6 rounded-full font-bold text-white shadow-lg transition-all duration-300 text-sm sm:text-base ${
+                modal.type === "success"
+                  ? "bg-green-500 hover:bg-green-600"
+                  : "bg-red-500 hover:bg-red-600"
+              }`}
+              onClick={() => setModal({ ...modal, open: false })}
+            >
+              ปิดหน้าต่าง
+            </button>
+          </div>
+          <style>{`
+            @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+            .animate-fade-in { animation: fade-in 0.3s ease; }
+            @keyframes pop-up { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+            .animate-pop-up { animation: pop-up 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+          `}</style>
+        </div>
+      )}
     </section>
   );
 };

@@ -8,21 +8,21 @@ const About = () => {
       title: "วิสัยทัศน์",
       description:
         "มุ่งมั่นเป็นผู้นำด้านระบบอัตโนมัติและซอฟต์แวร์ควบคุมโรงงาน เพื่อยกระดับอุตสาหกรรมไทยสู่ยุค Industry 4.0",
-      color: "from-blue-500 to-indigo-600",
+      color: "bg-[#257BFF]",
     },
     {
       icon: Users,
       title: "ทีมงานเชี่ยวชาญ",
       description:
-        "วิศวกรและโปรแกรมเมอร์ที่มีประสบการณ์ตรงด้าน PLC, SCADA, HMI และ Robot Programming",
-      color: "from-green-500 to-emerald-600",
+        "วิศวกรและโปรแกรมเมอร์ที่มีประสบการณ์ตรงด้าน PLC, MONITORING, HMI และ Robot Programming",
+      color: "bg-[#18DC22]",
     },
     {
       icon: Zap,
       title: "เทคโนโลยีล้ำสมัย",
       description:
         "ใช้เทคโนโลยี AI, IoT และ Machine Learning ร่วมกับระบบอัตโนมัติเพื่อการผลิตที่ชาญฉลาด",
-      color: "from-purple-500 to-violet-600",
+      color: "bg-[#257BFF]",
     },
   ];
 
@@ -56,15 +56,10 @@ const About = () => {
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-300 group bg-white/70 backdrop-blur-md hover:bg-white/90 overflow-hidden relative z-10"
+              className="border-0 shadow-xl hover:shadow-2xl transition-all duration-300 group bg-white/90 backdrop-blur-md hover:bg-white overflow-hidden relative z-10"
             >
               <div
-                className="absolute inset-0 bg-gradient-to-br opacity-10 group-hover:opacity-20 transition-opacity duration-300"
-                style={{
-                  backgroundImage: `linear-gradient(135deg, ${
-                    feature.color.split(" ")[1]
-                  }, ${feature.color.split(" ")[3]})`,
-                }}
+                className={`absolute inset-0 ${feature.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}
               ></div>
               <CardHeader className="text-center pb-2 sm:pb-4 relative">
                 <div

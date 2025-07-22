@@ -23,85 +23,14 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ShinyText from "./ShinyText";
+import kttechLogo from "@/assets/kttech-logo.png";
 
 const Hero = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [particles, setParticles] = useState<any[]>([]);
-
-  // Interactive particle system
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particleCount = 50;
-    const particleArray: any[] = [];
-
-    // Create particles
-    for (let i = 0; i < particleCount; i++) {
-      particleArray.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.5 + 0.2,
-        color: `hsl(${200 + Math.random() * 60}, 70%, 60%)`,
-      });
-    }
-
-    setParticles(particleArray);
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particleArray.forEach((particle, i) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        // Bounce off edges
-        if (particle.x <= 0 || particle.x >= canvas.width) particle.vx *= -1;
-        if (particle.y <= 0 || particle.y >= canvas.height) particle.vy *= -1;
-
-        // Draw particle
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = particle.color;
-        ctx.globalAlpha = particle.opacity;
-        ctx.fill();
-
-        // Draw connections
-        for (let j = i + 1; j < particleArray.length; j++) {
-          const dx = particleArray[j].x - particle.x;
-          const dy = particleArray[j].y - particle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(particleArray[j].x, particleArray[j].y);
-            ctx.strokeStyle = particle.color;
-            ctx.globalAlpha = ((100 - distance) / 100) * 0.2;
-            ctx.stroke();
-          }
-        }
-      });
-
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-  }, []);
 
   // Enhanced 3D parallax effect
   useEffect(() => {
@@ -114,7 +43,6 @@ const Hero = () => {
 
       setMousePos({ x, y });
 
-      // Enhanced 3D parallax layers
       const layers = parallaxRef.current.children;
       for (let i = 0; i < layers.length; i++) {
         const layer = layers[i] as HTMLElement;
@@ -155,94 +83,56 @@ const Hero = () => {
       icon: Bot,
       title: "AI & Robot",
       desc: "ระบบหุ่นยนต์อัจฉริยะ",
-      color: "from-blue-500 to-cyan-500",
+      color: "from-blue-500 to-cyan-400",
     },
     {
       icon: Settings,
       title: "PLC System",
       desc: "ระบบควบคุมอุตสาหกรรม",
-      color: "from-purple-500 to-pink-500",
+      color: "from-green-500 to-cyan-400",
     },
     {
       icon: Wifi,
       title: "IoT Solutions",
       desc: "เชื่อมต่อทุกอุปกรณ์",
-      color: "from-green-500 to-teal-500",
+      color: "from-green-400 to-blue-400",
     },
     {
       icon: BarChart3,
-      title: "SCADA",
-      desc: "ระบบติดตามและควบคุม",
-      color: "from-orange-500 to-red-500",
+      title: "Monitoring",
+      desc: "ระบบมอนิเตอร์และแสดงผลข้อมูลแบบเรียลไทม์",
+      color: "from-[#18DC22] to-blue-500",
     },
   ];
 
   const stats = [
-    { value: "500+", label: "โครงการที่สำเร็จ", icon: Trophy },
+    { value: "100+", label: "โครงการที่สำเร็จ", icon: Trophy },
     { value: "50+", label: "ลูกค้าองค์กร", icon: Users },
-    { value: "15+", label: "ปีประสบการณ์", icon: Award },
-    { value: "24/7", label: "ซัพพอร์ต", icon: Shield },
+    { value: "10+", label: "ปีประสบการณ์", icon: Award },
   ];
 
   return (
     <section
       ref={heroRef}
       id="home"
-      className="relative overflow-hidden min-h-screen bg-gradient-to-br from-primary-light via-background to-secondary-light pt-12 pb-12 sm:pt-16 sm:pb-16 md:pt-20 md:pb-20 lg:pt-10 lg:pb-24"
+      className="relative overflow-hidden min-h-screen bg-[#ebf2ff] pt-12 pb-12 sm:pt-16 sm:pb-16 md:pt-20 md:pb-20 lg:pt-10 lg:pb-24"
     >
-      {/* Interactive Particle Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{ zIndex: 1 }}
-      />
-
-      {/* Enhanced 3D Parallax Layers */}
+      {/* Parallax Layers */}
       <div
         ref={parallaxRef}
         className="absolute inset-0 pointer-events-none"
         style={{ zIndex: 2 }}
       >
-        <div className="absolute -top-1/2 -left-1/2 w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] md:w-[1000px] md:h-[1000px] bg-gradient-to-br from-blue-100/40 via-blue-200/30 to-blue-50/20 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute -bottom-1/2 -right-1/2 w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] md:w-[800px] md:h-[800px] bg-gradient-to-tl from-blue-200/30 via-blue-100/20 to-blue-50/10 rounded-full blur-2xl animate-float-diagonal" />
-        <div className="absolute top-1/4 left-1/3 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[600px] md:h-[600px] bg-gradient-to-r from-primary/10 via-blue-100/10 to-blue-50/10 rounded-full blur-xl animate-spin-slow" />
-      </div>
-
-      {/* Geometric Floating Elements */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ zIndex: 3 }}
-      >
-        {Array.from({ length: 12 }).map((_, i) => (
-          <div
-            key={i}
-            className={`absolute w-2 h-2 sm:w-3 sm:h-3 bg-primary/10 rounded-full animate-float-element`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.3}s`,
-              animationDuration: `${4 + Math.random() * 3}s`,
-              transform: `rotate(${i * 30}deg)`,
-            }}
-          />
-        ))}
+        <div className="absolute -top-1/2 -left-1/2 w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] md:w-[1000px] md:h-[1000px] bg-gradient-to-br from-blue-100/40 via-green-100/30 to-cyan-50/20 rounded-full blur-3xl animate-pulse-glow" />
+        <div className="absolute -bottom-1/2 -right-1/2 w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] md:w-[800px] md:h-[800px] bg-gradient-to-tl from-green-200/30 via-blue-100/20 to-cyan-50/10 rounded-full blur-2xl animate-float-diagonal" />
+        <div className="absolute top-1/4 left-1/3 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[600px] md:h-[600px] bg-gradient-to-r from-primary/10 via-green-100/10 to-blue-50/10 rounded-full blur-xl animate-spin-slow" />
       </div>
 
       <div className="container max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 relative z-10 pt-10 sm:pt-20">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-16">
-          {/* Enhanced Left Content */}
+          {/* Left Content */}
           <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-            {/* Premium Badge with Animation */}
-            <div className="inline-flex items-center space-x-3 px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-xl mb-6 sm:mb-8 animate-fade-in-up hover:scale-105 transition-transform duration-300">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <Award className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-              <span className="text-xs sm:text-sm font-semibold text-primary">
-                Leading Industry 4.0 Innovation
-              </span>
-              <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 animate-spin-slow" />
-            </div>
-
-            {/* Enhanced Logo and Title */}
+            {/* Logo and Title */}
             <div className="mb-6 sm:mb-8">
               <div className="flex items-center space-x-4 sm:space-x-6 mb-2 sm:mb-4">
                 <div className="relative group">
@@ -285,13 +175,12 @@ const Hero = () => {
                   ผู้นำด้านเทคโนโลยีอัตโนมัติและระบบควบคุมอุตสาหกรรม
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed animate-fade-in-up delay-500">
-                  ขับเคลื่อนอุตสาหกรรมไทยสู่ยุคดิจิทัล
-                  ด้วยโซลูชันอัจฉริยะระดับโลก
+                  ขับเคลื่อนอุตสาหกรรมไทยสู่ยุคดิจิทัล ด้วยโซลูชันอัจฉริยะ
                 </p>
               </div>
             </div>
 
-            {/* Dynamic Tech Showcase */}
+            {/* Tech Showcase */}
             <div className="mb-4 sm:mb-6">
               <h3 className="text-lg sm:text-xl font-bold text-primary mb-4 sm:mb-6 animate-fade-in-up delay-600">
                 เทคโนโลยีหลักของเรา
@@ -342,7 +231,7 @@ const Hero = () => {
               ))}
             </div>
 
-            {/* Enhanced CTA Buttons */}
+            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 animate-fade-in-up delay-1200">
               <button className="group relative px-6 py-3 sm:px-10 sm:py-5 bg-primary text-primary-foreground rounded-full font-bold text-base sm:text-lg shadow-2xl hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 overflow-hidden min-h-[44px] min-w-[44px]">
                 <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -356,7 +245,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Enhanced Right Visual */}
+          {/* Right Visual */}
           <div className="lg:w-1/2 flex justify-center">
             <div className="relative group">
               {/* Animated Holographic Rings */}
@@ -376,71 +265,84 @@ const Hero = () => {
               </div>
 
               {/* Main Interactive Logo */}
-              <div className="relative z-20 w-64 h-64 flex items-center justify-center">
-                {/* Glassmorphism Container */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-primary/10 to-primary/5 rounded-full backdrop-blur-2xl border border-primary/20 shadow-2xl" />
-
-                {/* Central Logo */}
-                <div className="relative z-30 w-40 h-40 bg-gradient-to-br from-blue-100 via-blue-200 to-blue-50 rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-700 group-hover:scale-110 group-hover:rotate-12 animate-float-gentle">
-                  <div className="w-28 h-28 bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 rounded-full flex items-center justify-center relative overflow-hidden">
-                    <span className="text-5xl font-black text-primary z-10">
-                      KT
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+              <div className="relative z-20 w-full flex items-center justify-center mt-10">
+                <div className="relative z-30 w-[440px] h-[440px] flex items-center justify-center">
+                  <div
+                    className="absolute inset-0 rounded-full bg-[#257BFF]/20 blur-2xl animate-pulse"
+                    style={{ zIndex: 1 }}
+                  />
+                  <div
+                    className="absolute inset-4 rounded-full border-8 border-[#257BFF]/20"
+                    style={{ zIndex: 2 }}
+                  />
+                  <div
+                    className="absolute inset-12 rounded-full border-4 border-[#18DC22]/20"
+                    style={{ zIndex: 3 }}
+                  />
+                  <div
+                    className="absolute inset-20 rounded-full bg-white shadow-2xl"
+                    style={{ zIndex: 4 }}
+                  />
+                  <div className="relative w-[200px] h-[200px] flex items-center justify-center z-10">
+                    <img
+                      src={kttechLogo}
+                      alt="KT Tech Solution Logo"
+                      className="w-full h-full object-contain drop-shadow-xl animate-pulse"
+                      style={{ background: "transparent" }}
+                    />
                   </div>
-                </div>
-
-                {/* Orbiting Tech Icons */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {[
-                    {
-                      icon: Bot,
-                      position: "top-8 left-1/2 -translate-x-1/2",
-                      color: "bg-primary/10",
-                    },
-                    {
-                      icon: Cpu,
-                      position: "top-1/2 right-8 -translate-y-1/2",
-                      color: "bg-primary/10",
-                    },
-                    {
-                      icon: Wifi,
-                      position: "bottom-8 left-1/2 -translate-x-1/2",
-                      color: "bg-primary/10",
-                    },
-                    {
-                      icon: Gauge,
-                      position: "top-1/2 left-8 -translate-y-1/2",
-                      color: "bg-primary/10",
-                    },
-                    {
-                      icon: Code,
-                      position: "top-16 right-16",
-                      color: "bg-secondary/10",
-                    },
-                    {
-                      icon: Shield,
-                      position: "top-16 left-16",
-                      color: "bg-secondary/10",
-                    },
-                    {
-                      icon: Lightbulb,
-                      position: "bottom-16 right-16",
-                      color: "bg-secondary/10",
-                    },
-                    {
-                      icon: Target,
-                      position: "bottom-16 left-16",
-                      color: "bg-secondary/10",
-                    },
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className={`absolute ${item.position} w-10 h-10 ${item.color} rounded-full flex items-center justify-center backdrop-blur-sm border border-primary/10 shadow-lg animate-orbit-${index} hover:scale-110 transition-transform duration-300`}
-                    >
-                      <item.icon className="h-6 w-6 text-primary" />
-                    </div>
-                  ))}
+                  {/* Orbiting Tech Icons (Desktop Only) */}
+                  <div className="absolute inset-0 pointer-events-none z-20 hidden md:block">
+                    {[
+                      {
+                        icon: Bot,
+                        position: "top-4 left-1/2 -translate-x-1/2",
+                        color: "bg-[#257BFF]/10",
+                      },
+                      {
+                        icon: Cpu,
+                        position: "top-1/2 right-4 -translate-y-1/2",
+                        color: "bg-[#257BFF]/10",
+                      },
+                      {
+                        icon: Wifi,
+                        position: "bottom-4 left-1/2 -translate-x-1/2",
+                        color: "bg-[#257BFF]/10",
+                      },
+                      {
+                        icon: Gauge,
+                        position: "top-1/2 left-4 -translate-y-1/2",
+                        color: "bg-[#257BFF]/10",
+                      },
+                      {
+                        icon: Code,
+                        position: "top-10 right-10",
+                        color: "bg-[#18DC22]/10",
+                      },
+                      {
+                        icon: Shield,
+                        position: "top-10 left-10",
+                        color: "bg-[#18DC22]/10",
+                      },
+                      {
+                        icon: Lightbulb,
+                        position: "bottom-10 right-10",
+                        color: "bg-[#18DC22]/10",
+                      },
+                      {
+                        icon: Target,
+                        position: "bottom-10 left-10",
+                        color: "bg-[#18DC22]/10",
+                      },
+                    ].map((item, index) => (
+                      <div
+                        key={index}
+                        className={`absolute ${item.position} w-16 h-16 ${item.color} rounded-full flex items-center justify-center backdrop-blur-sm border border-[#257BFF]/10 shadow-lg animate-orbit-${index} hover:scale-110 transition-transform duration-300`}
+                      >
+                        <item.icon className="h-10 w-10 text-[#257BFF]" />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -485,24 +387,6 @@ const Hero = () => {
           to { transform: rotate(360deg); }
         }
 
-        @keyframes float-element {
-          0%, 100% { 
-            transform: translateY(0) rotate(0deg); 
-          }
-          50% { 
-            transform: translateY(-20px) rotate(180deg); 
-          }
-        }
-
-        @keyframes float-gentle {
-          0%, 100% { 
-            transform: translateY(0) rotate(0deg); 
-          }
-          50% { 
-            transform: translateY(-10px) rotate(5deg); 
-          }
-        }
-
         @keyframes ping-slow {
           0% { 
             transform: scale(1); 
@@ -512,11 +396,6 @@ const Hero = () => {
             transform: scale(1.2); 
             opacity: 0; 
           }
-        }
-
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
         }
 
         @keyframes orbit-0 {
@@ -563,10 +442,7 @@ const Hero = () => {
         .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
         .animate-float-diagonal { animation: float-diagonal 10s ease-in-out infinite; }
         .animate-spin-slow { animation: spin-slow 20s linear infinite; }
-        .animate-float-element { animation: float-element 6s ease-in-out infinite; }
-        .animate-float-gentle { animation: float-gentle 4s ease-in-out infinite; }
         .animate-ping-slow { animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite; }
-        .animate-shimmer { animation: shimmer 3s ease-in-out infinite; }
         .animate-orbit-0 { animation: orbit-0 20s linear infinite; }
         .animate-orbit-1 { animation: orbit-1 25s linear infinite; }
         .animate-orbit-2 { animation: orbit-2 30s linear infinite; }
