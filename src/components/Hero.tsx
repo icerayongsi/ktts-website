@@ -53,10 +53,10 @@ const Hero = () => {
         const rotateY = x * 10 * depth;
 
         layer.style.transform = `
-          perspective(1000px) 
-          translateX(${moveX}px) 
+          perspective(1000px)
+          translateX(${moveX}px)
           translateY(${moveY}px)
-          rotateX(${rotateX}deg) 
+          rotateX(${rotateX}deg)
           rotateY(${rotateY}deg)
           translateZ(${depth * 50}px)
         `;
@@ -213,12 +213,14 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Stats Counter */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 mb-6 sm:mb-8">
+            {/* Stats Counter - MODIFIED */}
+            <div className="flex flex-col gap-2 sm:gap-4 mb-6 sm:mb-8 md:grid md:grid-cols-4">
+              {" "}
+              {/* Changed to flex-col for mobile, then grid on md+ */}
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="text-center p-2 sm:p-4 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300 animate-fade-in-up delay-1000"
+                  className="text-center p-4 rounded-lg bg-card border border-border hover:border-primary/30 transition-all duration-300 animate-fade-in-up delay-1000 w-full" /* Added w-full and consistent p-4 */
                 >
                   <stat.icon className="h-6 w-6 sm:h-8 sm:w-8 text-primary mx-auto mb-1 sm:mb-2" />
                   <div className="text-lg sm:text-2xl font-bold text-primary">
@@ -231,12 +233,18 @@ const Hero = () => {
               ))}
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 animate-fade-in-up delay-1200">
-              <button className="group relative px-6 py-3 sm:px-10 sm:py-5 bg-primary text-primary-foreground rounded-full font-bold text-base sm:text-lg shadow-2xl hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 overflow-hidden min-h-[44px] min-w-[44px]">
+            {/* CTA Buttons - MODIFIED */}
+            <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:space-x-4 animate-fade-in-up delay-1200">
+              {" "}
+              {/* Removed sm:space-x-4 from here, moved w-full to button */}
+              <button className="group relative px-6 py-3 sm:px-10 sm:py-5 bg-primary text-primary-foreground rounded-full font-bold text-base sm:text-lg shadow-2xl hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2 overflow-hidden min-h-[44px] min-w-[44px] w-full">
+                {" "}
+                {/* Added w-full here */}
                 <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12" />
-                <div className="relative flex items-center space-x-2 sm:space-x-3">
+                <div className="relative flex items-center justify-center space-x-2 sm:space-x-3">
+                  {" "}
+                  {/* Added justify-center for button content */}
                   <MousePointer2 className="h-5 w-5 sm:h-6 sm:w-6 group-hover:rotate-12 transition-transform duration-300" />
                   <span>สำรวจโซลูชัน</span>
                   <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 group-hover:translate-x-2 transition-transform duration-300" />
@@ -265,7 +273,7 @@ const Hero = () => {
               </div>
 
               {/* Main Interactive Logo */}
-              <div className="relative z-20 w-full flex items-center justify-center mt-10">
+              <div className="relative z-20 w-full flex items-center justify-center mt-10 hidden md:block">
                 <div className="relative z-30 w-[440px] h-[440px] flex items-center justify-center">
                   <div
                     className="absolute inset-0 rounded-full bg-[#257BFF]/20 blur-2xl animate-pulse"
@@ -363,22 +371,22 @@ const Hero = () => {
         }
 
         @keyframes pulse-glow {
-          0%, 100% { 
-            opacity: 0.2; 
-            transform: scale(1); 
+          0%, 100% {
+            opacity: 0.2;
+            transform: scale(1);
           }
-          50% { 
-            opacity: 0.4; 
-            transform: scale(1.1); 
+          50% {
+            opacity: 0.4;
+            transform: scale(1.1);
           }
         }
 
         @keyframes float-diagonal {
-          0%, 100% { 
-            transform: translateX(0) translateY(0) rotate(0deg); 
+          0%, 100% {
+            transform: translateX(0) translateY(0) rotate(0deg);
           }
-          50% { 
-            transform: translateX(-30px) translateY(-30px) rotate(180deg); 
+          50% {
+            transform: translateX(-30px) translateY(-30px) rotate(180deg);
           }
         }
 
@@ -388,13 +396,13 @@ const Hero = () => {
         }
 
         @keyframes ping-slow {
-          0% { 
-            transform: scale(1); 
-            opacity: 1; 
+          0% {
+            transform: scale(1);
+            opacity: 1;
           }
-          75%, 100% { 
-            transform: scale(1.2); 
-            opacity: 0; 
+          75%, 100% {
+            transform: scale(1.2);
+            opacity: 0;
           }
         }
 
