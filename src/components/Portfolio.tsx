@@ -127,13 +127,13 @@ const Portfolio = () => {
   return (
     <section
       id="portfolio"
-      className="py-24 relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50"
+      className="py-24 relative overflow-hidden bg-[#F5FAFF]"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-200/30 to-cyan-200/30 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-emerald-200/20 to-teal-200/20 rounded-full blur-3xl animate-pulse delay-500"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#257BFF]/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-[#18DC22]/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#257BFF]/10 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -248,21 +248,18 @@ const Portfolio = () => {
                   {/* Enhanced CTA Button */}
                   <a
                     href={project.link}
-                    className={`inline-flex items-center gap-3 px-6 py-4 bg-gradient-to-r ${project.gradient} text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center group/btn relative overflow-hidden`}
+                    className={`inline-flex items-center gap-3 px-6 py-4 bg-[#257BFF] hover:bg-[#174EA6] text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 w-full justify-center group/btn relative overflow-hidden border border-[#257BFF] hover:border-[#174EA6]`}
                   >
                     <span className="relative z-10">ดูรายละเอียด</span>
                     <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300 relative z-10" />
                     <ExternalLink className="w-4 h-4 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 relative z-10" />
-
-                    {/* Button shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
                   </a>
                 </CardContent>
               </div>
 
               {/* Floating Elements */}
-              <div className="absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
-              <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse delay-200"></div>
+              <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
+              <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-blue-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse delay-200"></div>
             </Card>
           ))}
         </div>

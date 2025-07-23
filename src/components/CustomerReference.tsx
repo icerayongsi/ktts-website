@@ -9,7 +9,6 @@ const customerLogos = [
   { src: sumitomoLogo, alt: "Sumitomo" },
   { src: siamLogo, alt: "Siam\u00A0Calsonic" },
   { src: osotspaLogo, alt: "Osotspa" },
-  { src: goodyearLogo, alt: "Goodyear" },
   { src: chLogo, alt: "CH" },
 ];
 

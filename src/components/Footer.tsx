@@ -102,7 +102,6 @@ const Footer = () => {
                   <p className="font-medium text-primary-foreground mb-1">
                     โทรศัพท์
                   </p>
-                  <p>065-391-9764</p>
                   <p>093-324-2933</p>
                 </div>
               </div>

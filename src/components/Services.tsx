@@ -26,8 +26,8 @@ const Services = () => {
         "Omron CP1H/NJ",
         "Allen Bradley",
       ],
-      color: "from-blue-500 to-cyan-500",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
+      color: "bg-[#257BFF]",
+      bgColor: "bg-[#ebf2ff] dark:bg-[#ebf2ff]",
     },
     {
       icon: Bot,
@@ -40,22 +40,22 @@ const Services = () => {
         "Assembly Line",
         "Material Handling",
       ],
-      color: "from-purple-500 to-pink-500",
-      bgColor: "bg-purple-50 dark:bg-purple-900/20",
+      color: "bg-[#18DC22]",
+      bgColor: "bg-[#F5FFF7] dark:bg-[#F5FFF7]",
     },
     {
       icon: Settings,
-      title: "SCADA & HMI System",
+      title: "Monitoring System",
       description:
-        "ออกแบบระบบ SCADA และ HMI สำหรับตรวจสอบและควบคุมกระบวนการผลิตแบบเรียลไทม์",
+        "ออกแบบระบบ Monitoring สำหรับติดตาม ตรวจสอบ และแสดงผลข้อมูลกระบวนการผลิตแบบเรียลไทม์",
       features: [
         "Real-time Monitoring",
         "Data Visualization",
         "Alarm Management",
         "Report Generation",
       ],
-      color: "from-green-500 to-emerald-500",
-      bgColor: "bg-green-50 dark:bg-green-900/20",
+      color: "bg-[#257BFF]",
+      bgColor: "bg-[#ebf2ff] dark:bg-[#ebf2ff]",
     },
     {
       icon: Factory,
@@ -69,7 +69,7 @@ const Services = () => {
         "Quality Control",
       ],
       color: "from-orange-500 to-red-500",
-      bgColor: "bg-orange-50 dark:bg-orange-900/20",
+      bgColor: "bg-[#F5FFF7] dark:bg-[#F5FFF7]",
     },
     {
       icon: Shield,
@@ -83,7 +83,7 @@ const Services = () => {
         "Analytics Dashboard",
       ],
       color: "from-indigo-500 to-blue-500",
-      bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
+      bgColor: "bg-[#ebf2ff] dark:bg-[#ebf2ff]",
     },
     {
       icon: Zap,
@@ -97,7 +97,7 @@ const Services = () => {
         "Training Service",
       ],
       color: "from-yellow-500 to-orange-500",
-      bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+      bgColor: "bg-[#F5FFF7] dark:bg-[#F5FFF7]",
     },
   ];
 
@@ -127,13 +127,12 @@ const Services = () => {
           {services.map((service, index) => (
             <Card
               key={index}
-              className={`relative overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer ${service.bgColor} backdrop-blur-md z-10`}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
+              className={`relative overflow-hidden border border-[#e0e7ef] rounded-xl shadow-xl transition-all duration-500 transform cursor-pointer ${service.bgColor} backdrop-blur-md z-10 group hover:scale-105 hover:shadow-2xl hover:border-[#257BFF] hover:-translate-y-2 hover:ring-4 hover:ring-[#257BFF]/20`}
             >
               {/* Gradient Background */}
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-10 hover:opacity-20 transition-opacity duration-500`}
+                className={`absolute inset-0 ${service.bgColor} opacity-100 transition-all duration-500 scale-100 border border-[#e0e7ef] rounded-xl`}
+                style={{ zIndex: 0 }}
               ></div>
 
               {/* Animated Border */}
@@ -147,14 +146,24 @@ const Services = () => {
 
               <CardHeader className="text-center relative z-10 pb-2 sm:pb-4">
                 <div
-                  className={`w-14 h-14 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 transition-all duration-500 ${
-                    hoveredCard === index ? "scale-110" : "scale-100"
-                  } drop-shadow-xl`}
+                  className={`w-14 h-14 sm:w-20 sm:h-20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 transition-all duration-500 drop-shadow-xl group-hover:scale-110 group-hover:shadow-[0_0_32px_0_rgba(37,123,255,0.15)] group-hover:bg-white/80`}
                 >
                   <div
-                    className={`w-10 h-10 sm:w-16 sm:h-16 bg-gradient-to-r ${service.color} rounded-full flex items-center justify-center shadow-lg`}
+                    className={`w-10 h-10 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-lg ${
+                      service.title === "ระบบ PLC Programming" ||
+                      service.title === "Monitoring System" ||
+                      service.title === "Industrial IoT"
+                        ? "bg-[#257BFF]"
+                        : service.title === "Robot Programming" ||
+                          service.title === "Factory Automation" ||
+                          service.title === "Maintenance & Support"
+                        ? "bg-[#18DC22]"
+                        : "bg-[#FFD600]"
+                    }`}
                   >
-                    <service.icon className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+                    <service.icon
+                      className={`h-6 w-6 sm:h-8 sm:w-8 text-white`}
+                    />
                   </div>
                 </div>
                 <CardTitle className="text-base sm:text-xl font-bold text-gray-800 dark:text-slate-100 mb-2 sm:mb-3 drop-shadow">
@@ -169,11 +178,7 @@ const Services = () => {
 
                 {/* Features List */}
                 <div
-                  className={`space-y-2 sm:space-y-3 transition-all duration-500 ${
-                    hoveredCard === index
-                      ? "opacity-100 transform translate-y-0"
-                      : "opacity-0 transform translate-y-4"
-                  }`}
+                  className={`space-y-2 sm:space-y-3 transition-all duration-500 opacity-100 transform translate-y-0`}
                 >
                   {service.features.map((feature, featureIndex) => (
                     <div
@@ -187,18 +192,12 @@ const Services = () => {
                 </div>
 
                 {/* Learn More Button */}
-                <div
-                  className={`mt-4 sm:mt-6 transition-all duration-500 ${
-                    hoveredCard === index
-                      ? "opacity-100 transform translate-y-0"
-                      : "opacity-0 transform translate-y-4"
-                  }`}
-                >
+                <div className={`mt-4 sm:mt-6 transition-all duration-500`}>
                   <button
-                    className={`inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 bg-gradient-to-r ${service.color} text-white rounded-full text-xs sm:text-sm font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105 min-h-[40px] min-w-[40px]`}
+                    className={`inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 bg-white border border-[#e0e7ef] text-[#257BFF] rounded-full text-xs sm:text-sm font-bold hover:shadow-lg transition-all duration-300 transform hover:scale-105 min-h-[40px] min-w-[40px]`}
                   >
                     เรียนรู้เพิ่มเติม
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ml-2 h-4 w-4 text-[#257BFF]" />
                   </button>
                 </div>
               </CardContent>
