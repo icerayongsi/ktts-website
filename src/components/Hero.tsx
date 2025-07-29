@@ -253,8 +253,8 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Visual */}
-          <div className="lg:w-1/2 flex justify-center">
+          {/* Right Visual - Hidden on Mobile */}
+          <div className="hidden lg:block lg:w-1/2 flex justify-center">
             <div className="relative group">
               {/* Animated Holographic Rings */}
               <div className="absolute inset-0 flex items-center justify-center">
@@ -273,7 +273,7 @@ const Hero = () => {
               </div>
 
               {/* Main Interactive Logo */}
-              <div className="relative z-20 w-full flex items-center justify-center mt-10 hidden md:block">
+              <div className="relative z-20 w-full flex items-center justify-center mt-10">
                 <div className="relative z-30 w-[440px] h-[440px] flex items-center justify-center">
                   <div
                     className="absolute inset-0 rounded-full bg-[#257BFF]/20 blur-2xl animate-pulse"
@@ -299,8 +299,8 @@ const Hero = () => {
                       style={{ background: "transparent" }}
                     />
                   </div>
-                  {/* Orbiting Tech Icons (Desktop Only) */}
-                  <div className="absolute inset-0 pointer-events-none z-20 hidden md:block">
+                  {/* Orbiting Tech Icons */}
+                  <div className="absolute inset-0 pointer-events-none z-20">
                     {[
                       {
                         icon: Bot,
